@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "orderNumber": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "totalNumber": {
+      "type": "decimal",
+      "required": true
+    },
+    "orderStatus": {
+      "type": "enumeration",
+      "enum": [
+        "pending, confirmed, shipped, delivered, cancelled"
+      ]
+    },
+    "paymentStatus": {
+      "type": "enumeration",
+      "enum": [
+        "pending, paid, failed"
+      ]
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
+    },
+    "order_item": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::order-item.order-item",
+      "inversedBy": "orders"
+    }
+  }
+}
