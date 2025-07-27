@@ -520,9 +520,18 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    customerEmail: Schema.Attribute.Email;
+    customerName: Schema.Attribute.String & Schema.Attribute.Required;
+    customerPhone: Schema.Attribute.String & Schema.Attribute.Required;
+    deliveryAddress: Schema.Attribute.Text;
+    deliveryMethod: Schema.Attribute.Enumeration<
+      ['store_pickup', 'courier_ts', 'cdek_pickup', 'cdek_courier']
+    > &
+      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
+    notes: Schema.Attribute.Text;
     order_item: Schema.Attribute.Relation<
       'manyToOne',
       'api::order-item.order-item'
@@ -531,9 +540,13 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     orderStatus: Schema.Attribute.Enumeration<
-      ['pending, confirmed, shipped, delivered, cancelled']
+      ['pending, ', 'confirmed, ', 'shipped, ', 'delivered, ', 'cancelled']
     >;
-    paymentStatus: Schema.Attribute.Enumeration<['pending, paid, failed']>;
+    paymentMethod: Schema.Attribute.Enumeration<['card', 'cash_vladivostok']> &
+      Schema.Attribute.Required;
+    paymentStatus: Schema.Attribute.Enumeration<
+      ['pending, ', 'paid, ', 'failed']
+    >;
     publishedAt: Schema.Attribute.DateTime;
     totalNumber: Schema.Attribute.Decimal & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -580,16 +593,9 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       'oneToOne',
       'api::order-item.order-item'
     >;
-    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    reservedQuantity: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<0>;
     sizes: Schema.Attribute.Relation<'manyToMany', 'api::size.size'>;
     slug: Schema.Attribute.UID<'name'>;
-    stockQuantity: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -617,8 +623,12 @@ export interface ApiSizeSize extends Struct.CollectionTypeSchema {
       'oneToOne',
       'api::order-item.order-item'
     >;
+    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    productName: Schema.Attribute.String & Schema.Attribute.Required;
     products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
+    reservedQuantity: Schema.Attribute.Integer;
+    stockQuantity: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

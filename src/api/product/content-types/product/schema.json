@@ -20,20 +20,6 @@
       "type": "string",
       "required": true
     },
-    "price": {
-      "type": "decimal",
-      "required": true
-    },
-    "stockQuantity": {
-      "type": "integer",
-      "required": true,
-      "default": 0
-    },
-    "reservedQuantity": {
-      "type": "integer",
-      "required": true,
-      "default": 0
-    },
     "mainPhoto": {
       "type": "string"
     },

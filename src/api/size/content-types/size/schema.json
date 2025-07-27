@@ -11,6 +11,10 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "productName": {
+      "type": "string",
+      "required": true
+    },
     "value": {
       "type": "string"
     },
@@ -25,6 +29,16 @@
       "relation": "oneToOne",
       "target": "api::order-item.order-item",
       "mappedBy": "size"
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "stockQuantity": {
+      "type": "integer"
+    },
+    "reservedQuantity": {
+      "type": "integer"
     }
   }
 }
