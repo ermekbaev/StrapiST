@@ -11,7 +11,23 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Quantity": {
+    "orderId": {
+      "type": "string",
+      "required": true
+    },
+    "productId": {
+      "type": "string",
+      "required": true
+    },
+    "productName": {
+      "type": "string",
+      "required": true
+    },
+    "size": {
+      "type": "string",
+      "required": true
+    },
+    "quantity": {
       "type": "integer",
       "required": true,
       "default": 1,
@@ -20,24 +36,6 @@
     "priceAtTime": {
       "type": "decimal",
       "required": true
-    },
-    "orders": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::order.order",
-      "mappedBy": "order_item"
-    },
-    "product": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::product.product",
-      "inversedBy": "order_item"
-    },
-    "size": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::size.size",
-      "inversedBy": "order_item"
     }
   }
 }

@@ -486,11 +486,12 @@ export interface ApiOrderItemOrderItem extends Struct.CollectionTypeSchema {
       'api::order-item.order-item'
     > &
       Schema.Attribute.Private;
-    orders: Schema.Attribute.Relation<'oneToMany', 'api::order.order'>;
+    orderId: Schema.Attribute.String & Schema.Attribute.Required;
     priceAtTime: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    productId: Schema.Attribute.String & Schema.Attribute.Required;
+    productName: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    Quantity: Schema.Attribute.Integer &
+    quantity: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
         {
@@ -499,7 +500,7 @@ export interface ApiOrderItemOrderItem extends Struct.CollectionTypeSchema {
         number
       > &
       Schema.Attribute.DefaultTo<1>;
-    size: Schema.Attribute.Relation<'oneToOne', 'api::size.size'>;
+    size: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -509,6 +510,7 @@ export interface ApiOrderItemOrderItem extends Struct.CollectionTypeSchema {
 export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   collectionName: 'orders';
   info: {
+    description: 'Customer orders from the website';
     displayName: 'Order';
     pluralName: 'orders';
     singularName: 'order';
@@ -532,27 +534,27 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
     notes: Schema.Attribute.Text;
-    order_item: Schema.Attribute.Relation<
-      'manyToOne',
+    order_items: Schema.Attribute.Relation<
+      'oneToMany',
       'api::order-item.order-item'
     >;
     orderNumber: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     orderStatus: Schema.Attribute.Enumeration<
-      ['pending, ', 'confirmed, ', 'shipped, ', 'delivered, ', 'cancelled']
-    >;
+      ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled']
+    > &
+      Schema.Attribute.DefaultTo<'pending'>;
     paymentMethod: Schema.Attribute.Enumeration<['card', 'cash_vladivostok']> &
       Schema.Attribute.Required;
-    paymentStatus: Schema.Attribute.Enumeration<
-      ['pending, ', 'paid, ', 'failed']
-    >;
+    paymentStatus: Schema.Attribute.Enumeration<['pending', 'paid', 'failed']> &
+      Schema.Attribute.DefaultTo<'pending'>;
     publishedAt: Schema.Attribute.DateTime;
-    totalNumber: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    totalAmount: Schema.Attribute.Decimal & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
+    user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;

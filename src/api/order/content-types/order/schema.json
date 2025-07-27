@@ -4,7 +4,8 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "Order"
+    "displayName": "Order",
+    "description": "Customer orders from the website"
   },
   "options": {
     "draftAndPublish": true
@@ -16,44 +17,9 @@
       "required": true,
       "unique": true
     },
-    "totalNumber": {
-      "type": "decimal",
-      "required": true
-    },
-    "orderStatus": {
-      "type": "enumeration",
-      "enum": [
-        "pending, ",
-        "confirmed, ",
-        "shipped, ",
-        "delivered, ",
-        "cancelled"
-      ]
-    },
-    "paymentStatus": {
-      "type": "enumeration",
-      "enum": [
-        "pending, ",
-        "paid, ",
-        "failed"
-      ]
-    },
-    "users_permissions_user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "orders"
-    },
-    "order_item": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::order-item.order-item",
-      "inversedBy": "orders"
-    },
     "customerName": {
       "type": "string",
-      "required": true,
-      "unique": false
+      "required": true
     },
     "customerPhone": {
       "type": "string",
@@ -62,29 +28,46 @@
     "customerEmail": {
       "type": "email"
     },
+    "totalAmount": {
+      "type": "decimal",
+      "required": true
+    },
     "deliveryMethod": {
       "type": "enumeration",
-      "required": true,
-      "enum": [
-        "store_pickup",
-        "courier_ts",
-        "cdek_pickup",
-        "cdek_courier"
-      ]
+      "enum": ["store_pickup", "courier_ts", "cdek_pickup", "cdek_courier"],
+      "required": true
     },
     "paymentMethod": {
-      "type": "enumeration",
-      "required": true,
-      "enum": [
-        "card",
-        "cash_vladivostok"
-      ]
+      "type": "enumeration", 
+      "enum": ["card", "cash_vladivostok"],
+      "required": true
     },
     "deliveryAddress": {
       "type": "text"
     },
     "notes": {
       "type": "text"
+    },
+    "orderStatus": {
+      "type": "enumeration",
+      "enum": ["pending", "confirmed", "shipped", "delivered", "cancelled"],
+      "default": "pending"
+    },
+    "paymentStatus": {
+      "type": "enumeration",
+      "enum": ["pending", "paid", "failed"],
+      "default": "pending"
+    },
+    "order_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order-item.order-item",
+      "mappedBy": "order"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
     }
   }
 }
