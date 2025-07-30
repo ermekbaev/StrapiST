@@ -1,13 +1,7 @@
-// src/api/order/routes/custom-order.ts
-export default {
-  routes: [
-    {
-      method: 'POST',
-      path: '/orders/create-with-user',
-      handler: 'order.createWithUser',
-      config: {
-        auth: false, // Публичный доступ
-      },
-    },
-  ],
-};
+/**
+ * order router
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::order.order');
