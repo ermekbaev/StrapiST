@@ -39,6 +39,11 @@
     },
     "reservedQuantity": {
       "type": "integer"
+    },
+    "article": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

@@ -24,8 +24,10 @@
       "required": true
     },
     "size": {
-      "type": "string",
-      "required": true
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::size.size",
+      "inversedBy": "order_item"
     },
     "quantity": {
       "type": "integer",
@@ -36,6 +38,12 @@
     "priceAtTime": {
       "type": "decimal",
       "required": true
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product",
+      "inversedBy": "order_item"
     }
   }
 }

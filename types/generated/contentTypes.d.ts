@@ -488,6 +488,7 @@ export interface ApiOrderItemOrderItem extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     orderId: Schema.Attribute.String & Schema.Attribute.Required;
     priceAtTime: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
     productId: Schema.Attribute.String & Schema.Attribute.Required;
     productName: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
@@ -500,7 +501,7 @@ export interface ApiOrderItemOrderItem extends Struct.CollectionTypeSchema {
         number
       > &
       Schema.Attribute.DefaultTo<1>;
-    size: Schema.Attribute.String & Schema.Attribute.Required;
+    size: Schema.Attribute.Relation<'oneToOne', 'api::size.size'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -573,9 +574,6 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
   attributes: {
     addTotalPhotos: Schema.Attribute.JSON;
-    article: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
     brand: Schema.Attribute.Relation<'manyToOne', 'api::brand.brand'>;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     createdAt: Schema.Attribute.DateTime;
@@ -615,6 +613,9 @@ export interface ApiSizeSize extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    article: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
