@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promocodes",
+  "info": {
+    "singularName": "promocode",
+    "pluralName": "promocodes",
+    "displayName": "Promocode"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "discountType": {
+      "type": "enumeration",
+      "enum": [
+        "percentage,",
+        "fixed_amount,",
+        "free_delivery"
+      ]
+    },
+    "discountValue": {
+      "type": "decimal",
+      "required": true
+    },
+    "minOrderAmount": {
+      "type": "decimal",
+      "default": 0
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
