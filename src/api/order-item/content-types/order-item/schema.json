@@ -44,6 +44,9 @@
       "relation": "oneToOne",
       "target": "api::product.product",
       "inversedBy": "order_item"
+    },
+    "productImage": {
+      "type": "text"
     }
   }
 }
