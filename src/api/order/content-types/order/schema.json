@@ -34,12 +34,20 @@
     },
     "deliveryMethod": {
       "type": "enumeration",
-      "enum": ["store_pickup", "courier_ts", "cdek_pickup", "cdek_courier"],
+      "enum": [
+        "store_pickup",
+        "courier_ts",
+        "cdek_pickup",
+        "cdek_courier"
+      ],
       "required": true
     },
     "paymentMethod": {
-      "type": "enumeration", 
-      "enum": ["card", "cash_vladivostok"],
+      "type": "enumeration",
+      "enum": [
+        "card",
+        "cash_vladivostok"
+      ],
       "required": true
     },
     "deliveryAddress": {
@@ -50,12 +58,22 @@
     },
     "orderStatus": {
       "type": "enumeration",
-      "enum": ["pending", "confirmed", "shipped", "delivered", "cancelled"],
+      "enum": [
+        "pending",
+        "confirmed",
+        "shipped",
+        "delivered",
+        "cancelled"
+      ],
       "default": "pending"
     },
     "paymentStatus": {
       "type": "enumeration",
-      "enum": ["pending", "paid", "failed"],
+      "enum": [
+        "pending",
+        "paid",
+        "failed"
+      ],
       "default": "pending"
     },
     "order_items": {
@@ -65,6 +83,12 @@
       "mappedBy": "order"
     },
     "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
+    },
+    "users_permissions_user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",

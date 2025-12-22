@@ -80,6 +80,11 @@
     },
     "lastLogin": {
       "type": "datetime"
+    },
+    "number": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }
