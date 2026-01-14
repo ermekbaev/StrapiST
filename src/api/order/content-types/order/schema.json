@@ -39,7 +39,7 @@
         "courier_ts",
         "cdek_pickup",
         "cdek_courier"
-      ],
+      ],  
       "required": true
     },
     "paymentMethod": {
