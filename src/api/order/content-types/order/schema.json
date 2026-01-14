@@ -46,6 +46,9 @@
       "type": "enumeration",
       "enum": [
         "card",
+        "sbp",
+        "tinkoff_bank",
+        "installments",
         "cash_vladivostok"
       ],
       "required": true
